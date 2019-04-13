@@ -1,0 +1,66 @@
+#include <iostream>
+#include <cmath>
+#include <vector>
+using namespace std;
+
+//MARTINEZ & GALSTIAN
+bool complimentary_primes(int x, int y) {
+	bool x_prime = false;
+	bool y_prime = false;
+	int count = 0;
+	for (int i = 1; i <= x; i++) {
+		if (x % i == 0)
+			count++;
+		if (count > 2) {
+			return false;
+		} else x_prime = true;
+	}
+	count = 0;
+	for (int i = 1; i <= y; i++) {
+		if (y % i == 0)
+			count++;
+		if (count > 2) {
+			return false;
+		} else y_prime = true;
+	}
+	if (abs(x - y) == 2 && x_prime == true && y_prime == true)
+		return true;
+	else return false;
+}
+
+bool perfect_number(int x) {
+	int count = 0;
+	bool x_prime = false;
+	vector<int> factors(0);
+	for (int i = 1; i < x; i++) {
+		if (x % i == 0) {
+			count++;
+			factors.push_back(i);
+		}
+	}
+	int sum = 0;
+	for (int i = 0; i < factors.size(); i++)
+		sum += factors.at(i);
+	if (sum == x && sum != 0) return true;
+	else return false;
+}
+
+int main() {
+	cout << "Welcome to Coding World!\n";
+	cout << "Input two numbers to see if they are twin primes:\n";
+	int x = 0, y = 0;
+	cin >> x >> y;
+	if (!cin) {
+		cout << "BAD INPUT!" << endl;
+		exit(0);
+	}
+	cout << boolalpha << complimentary_primes(x, y) << endl;
+	cout << "Input one number to see if it is perfect:\n";
+	cin >> x;
+	if (!cin) {
+		cout << "BAD INPUT!" << endl;
+		exit(0);
+	}
+	cout << boolalpha << perfect_number(x) << endl;
+}
+
